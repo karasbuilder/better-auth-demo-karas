@@ -1,14 +1,14 @@
 "use client";
+import { signOut } from "@/lib/actions/auth-action";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function DashboardClientPage() {
   const router = useRouter();
 
-  // Redirect to auth if not authenticated
-
   const handleSignOut = async () => {
-    alert("Signed out");
+    await signOut();
+    router.push("/auth");
   };
 
   return (
