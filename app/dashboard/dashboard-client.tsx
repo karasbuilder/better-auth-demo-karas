@@ -1,9 +1,10 @@
 "use client";
 import { signOut } from "@/lib/actions/auth-action";
+import { auth } from "@/lib/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-export default function DashboardClientPage() {
+type Session = typeof auth.$Infer.Session;
+export default function DashboardClientPage({ session }: { session: Session }) {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -35,8 +36,10 @@ export default function DashboardClientPage() {
                     }
                   />
                   <div className="text-sm">
-                    <p className="text-gray-900 font-medium">John Doe</p>
-                    <p className="text-gray-500">email@gmail.com</p>
+                    <p className="text-gray-900 font-medium">
+                      {session.user.name}
+                    </p>
+                    <p className="text-gray-500">{session.user.email}</p>
                   </div>
                 </div>
                 <button
